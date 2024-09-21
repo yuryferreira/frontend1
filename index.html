@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Calificaciones y Registro</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app" class="container">
+        <h1 class="text-center">Cálculo de Calificaciones y Registro</h1>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" :class="{ active: activeTab === 'calificaciones' }" @click="activeTab = 'calificaciones'">Cálculo de Calificaciones</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" :class="{ active: activeTab === 'registro' }" @click="activeTab = 'registro'">Formulario de Registro</a>
+            </li>
+        </ul>
+
+        <div v-if="activeTab === 'calificaciones'" class="mt-3">
+            <h2>Cálculo de Calificaciones</h2>
+            <form @submit.prevent="calcularCalificaciones">
+                <div class="form-group">
+                    <label for="nota1">Nota 1 (10-70):</label>
+                    <input type="number" v-model="nota1" class="form-control" id="nota1" required>
+                </div>
+                <div class="form-group">
+                    <label for="nota2">Nota 2 (10-70):</label>
+                    <input type="number" v-model="nota2" class="form-control" id="nota2" required>
+                </div>
+                <div class="form-group">
+                    <label for="nota3">Nota 3 (10-70):</label>
+                    <input type="number" v-model="nota3" class="form-control" id="nota3" required>
+                </div>
+                <div class="form-group">
+                    <label for="asistencia">Asistencia (0-100):</label>
+                    <input type="number" v-model="asistencia" class="form-control" id="asistencia" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Calcular</button>
+            </form>
+            <div v-if="resultado" class="mt-3">
+                <h4>{{ resultado }}</h4>
+            </div>
+        </div>
+
+        <div v-if="activeTab === 'registro'" class="mt-3">
+            <h2>Formulario de Registro</h2>
+            <form @submit.prevent="registrarUsuario">
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" v-model="nombre" class="form-control" id="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="correo">Correo:</label>
+                    <input type="email" v-model="correo" class="form-control" id="correo" required>
+                </div>
+                <div class="form-group">
+                    <label for="contrasena">Contraseña:</label>
+                    <input type="password" v-model="contrasena" class="form-control" id="contrasena" required>
+                </div>
+                <div class="form-group">
+                    <label for="repetirContrasena">Repetir Contraseña:</label>
+                    <input type="password" v-model="repetirContrasena" class="form-control" id="repetirContrasena" required>
+                </div>
+                <button type="submit" class="btn btn-success">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="app.js"></script>
+</body>
+</html>
